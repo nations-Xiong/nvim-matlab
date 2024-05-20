@@ -1,8 +1,8 @@
 import pynvim
 
 
-from matlab_cli_controller import MatlabCliController
-from python_nvim_utils import PythonNvimUtils as py_nvim_helper
+from .matlab_cli_controller import MatlabCliController
+from .python_nvim_utils import PythonNvimUtils as py_nvim_helper
 import python_nvim_utils
 
 
