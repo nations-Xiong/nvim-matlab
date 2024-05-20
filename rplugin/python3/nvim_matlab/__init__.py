@@ -64,8 +64,8 @@ class VimMatlab():
         if self.cli_controller is not None:
             return
         try:
-            server_path = os.path.join(os.path.dirname(__file__), '../../../scripts/nvim-server.py')
-            self.nvim.command(f'!tmux split-window -h')
+            server_path = os.path.join(os.path.dirname(__file__), '../../../scripts/matlab-server.py')
+            self.nvim.command(f'!tmux split-window -h python {server_path}')
         except Exception as e:
             pass
         # self.connect_to_matlab_cli()
