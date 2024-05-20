@@ -4,7 +4,7 @@ import socket
 from threading import Timer
 import time
 
-from logger import logger
+from .logger import logger
 
 TIME_DELAY_ADD_PATH = 5
 MAX_RETRY = 3
