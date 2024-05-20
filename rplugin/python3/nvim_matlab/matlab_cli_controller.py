@@ -52,4 +52,4 @@ class MatlabCliController():
         pass
 
     def send_ctrl_c(self):
-        self.s.sendall('cancel')
+        self.s.sendall('cancel'.encode('utf-8'))
