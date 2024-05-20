@@ -32,8 +32,8 @@ class MatlabCliController():
         num_retry = 0
         while num_retry < MAX_RETRY:
             try:
-                self.s.sendall(code.encode('utf-8'))
                 logger.info(f"{code=}")
+                self.s.sendall(code.encode('utf-8'))
             except Exception as ex:
                 logger.error(f"{ex}")
                 self.connect_to_server()
