@@ -27,6 +27,7 @@ class MatlabCliController():
 
     def exec_code(self, code_lines):
         code = ','.join(code_lines)
+        code += '\n'
 
         num_retry = 0
         while num_retry < MAX_RETRY:
