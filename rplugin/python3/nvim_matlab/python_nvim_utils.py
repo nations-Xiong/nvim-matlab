@@ -49,14 +49,14 @@ class PythonNvimUtils():
             if line in ('', '...'):
                 continue
 
-            has_ellipsis_suffix = PythonNvimUtils.ellipsis.match(line)
+            has_ellipsis_suffix = PythonNvimUtils.ellipsis_pattern.match(line)
             if has_ellipsis_suffix:
-                line = PythonNvimUtils.ellipsis.sub(r"\1", line)
+                line = PythonNvimUtils.ellipsis_pattern.sub(r"\1", line)
 
             if is_continuation and trim_lines:
                 trim_lines[-1] += line
             else:
-                trim_line.append(line)
+                trim_lines.append(line)
 
             is_continuation = has_ellipsis_suffix
 
