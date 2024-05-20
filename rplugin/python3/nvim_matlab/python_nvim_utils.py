@@ -34,7 +34,10 @@ class PythonNvimUtils():
 
     @staticmethod
     def get_lines_selected() -> list[str]:
-        lines = [line for line in nvim.current.range]
+        buf = nvim.current.buffer
+        row_start, _ = buf.mark('<')
+        row_end, _ = buf.mark('>')
+        lines = buf[row_start-1:row_end]
         return PythonNvimUtils.trim_matlab_code(lines)
 
     @staticmethod
