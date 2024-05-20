@@ -65,7 +65,7 @@ class VimMatlab():
             return
         try:
             server_path = os.path.join(os.path.dirname(__file__), '../../../scripts/nvim-server.py')
-            self.nvim.command(f'!tmux split-window -h python {server_path}')
+            self.nvim.command(f'!tmux split-window -h')
         except Exception as e:
             pass
         # self.connect_to_matlab_cli()
