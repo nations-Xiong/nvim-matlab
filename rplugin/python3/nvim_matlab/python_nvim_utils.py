@@ -75,7 +75,7 @@ class PythonNvimUtils():
         cont = PythonNvimUtils.ellipsis_pattern
 
         offset = 0
-        while cur_pos + 1 < num_line and cont.match(full_text[cur_pos + offset]):
+        while cur_pos + 1 < num_lines and cont.match(full_text[cur_pos + offset]):
             offset += 1
         end = cur_pos + offset + 1
 
