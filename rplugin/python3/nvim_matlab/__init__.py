@@ -50,3 +50,10 @@ class VimMatlab():
         if self.cli_controller is not None:
             return
         self.cli_controller = MatlabCliController()
+
+    @pynvim.command('MatlabCliDisconnect', sync=True)
+    def disconnect_from_matlab_cli(self):
+        if self.cli_controller is None:
+            return
+        self.cli_controller.disconnect_to_server()
+        self.cli_controller = None
