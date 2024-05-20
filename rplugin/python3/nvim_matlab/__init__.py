@@ -1,5 +1,6 @@
 import pynvim
 import os
+import time
 
 
 from .matlab_cli_controller import MatlabCliController
@@ -68,7 +69,14 @@ class VimMatlab():
             self.nvim.command(f'!tmux split-window -h python {server_path}')
         except Exception as e:
             pass
-        self.connect_to_matlab_cli()
+
+        while True:
+            try:
+                self.connect_to_matlab_cli()
+            except Exception as e:
+                pass
+            else:
+                break
 
     @pynvim.command('MatlabCliServerStop')
     def stop_matlab_cli_server(self):
