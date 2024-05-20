@@ -1,4 +1,5 @@
 import pynvim
+import os
 
 
 from .matlab_cli_controller import MatlabCliController
@@ -57,3 +58,21 @@ class VimMatlab():
             return
         self.cli_controller.disconnect_to_server()
         self.cli_controller = None
+
+    @pynvim.command('MatlabCliServerStart')
+    def start_matlab_cli_server(self):
+        if self.cli_controller is not None:
+            return
+        try:
+            server_path = os.path.join(os.path.dirname(__file__), '../../../scripts/nvim-server.py')
+            self.nvim.command(f'!tmux split-window -h python {server_path}')
+        except Exception as e:
+            pass
+        self.connect_to_matlab_cli()
+
+    @pynvim.command('MatlabCliServerStop')
+    def stop_matlab_cli_server(self):
+        if self.cli_controller is None:
+            return
+        self.cli_controller.send_kill()
+        self.disconnect_from_matlab_cli()
