@@ -68,7 +68,7 @@ class VimMatlab():
             self.nvim.command(f'!tmux split-window -h python {server_path}')
         except Exception as e:
             pass
-        self.connect_to_matlab_cli()
+        # self.connect_to_matlab_cli()
 
     @pynvim.command('MatlabCliServerStop')
     def stop_matlab_cli_server(self):
