@@ -7,6 +7,7 @@ from .matlab_cli_controller import MatlabCliController
 from .python_nvim_utils import PythonNvimUtils as py_nvim_helper
 import nvim_matlab.python_nvim_utils as python_nvim_utils
 
+TIME_INTERVAL_RETRY = 1
 
 @pynvim.plugin
 class VimMatlab():
@@ -74,7 +75,7 @@ class VimMatlab():
             try:
                 self.connect_to_matlab_cli()
             except Exception as e:
-                pass
+                time.sleep(TIME_INTERVAL_RETRY)
             else:
                 break
 
