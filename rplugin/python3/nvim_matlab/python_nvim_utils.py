@@ -88,3 +88,11 @@ class PythonNvimUtils():
         start = cur_pos + offset
         
         return PythonNvimUtils.trim_matlab_code(full_text[start:end])
+
+    @staticmethod
+    def get_word_at_cursor() -> str:
+        row, col = nvim.current.window.cursor
+        current_line = nvim.current.buffer[row - 1]
+        for m in PythonNvimUtils.variable_pattern.finditer(current_line):
+            if m.start() <= col <= m.end():
+                return m.group(0)

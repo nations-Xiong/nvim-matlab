@@ -20,13 +20,18 @@ class VimMatlab():
     def show_help_in_matlab_cli(self):
         if self.cli_controller is None:
             self.connect_to_matlab_cli()
-        pass
+        word_at_cursor = py_nvim_helper.get_word_at_cursor()
+        help_cmd = [f'help {word_at_cursor};']
+        self.cli_controller.exec_code(help_cmd)
 
     @pynvim.command('MatlabCliShowDoc', sync=True)
     def show_doc_in_matlab_cli(self):
         if self.cli_controller is None:
             self.connect_to_matlab_cli()
-        pass
+        word_at_cursor = py_nvim_helper.get_word_at_cursor()
+        doc_cmd = [f'doc {word_at_cursor};']
+        self.cli_controller.exec_code(doc_cmd)
+
 
     @pynvim.command('MatlabCliRunSelection', sync=True)
     def run_selection_in_matlab_cli(self):
