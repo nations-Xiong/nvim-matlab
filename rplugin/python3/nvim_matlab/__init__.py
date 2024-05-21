@@ -81,7 +81,7 @@ class VimMatlab():
         self.cli_controller = None
 
     @pynvim.command('MatlabCliServerStart')
-    def start_matlab_cli_server(self):
+    def start_matlab_cli_server(self, sync=True):
         if self.cli_controller is not None:
             return
         try:
