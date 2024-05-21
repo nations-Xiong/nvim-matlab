@@ -16,6 +16,18 @@ class VimMatlab():
         python_nvim_utils.nvim = nvim
         self.cli_controller = None
 
+    @pynvim.command('MatlabCliShowHelp', sync=True)
+    def show_help_in_matlab_cli(self):
+        if self.cli_controller is None:
+            self.connect_to_matlab_cli()
+        pass
+
+    @pynvim.command('MatlabCliShowDoc', sync=True)
+    def show_doc_in_matlab_cli(self):
+        if self.cli_controller is None:
+            self.connect_to_matlab_cli()
+        pass
+
     @pynvim.command('MatlabCliRunSelection', sync=True)
     def run_selection_in_matlab_cli(self):
         if self.cli_controller is None:
@@ -52,7 +64,14 @@ class VimMatlab():
     def connect_to_matlab_cli(self):
         if self.cli_controller is not None:
             return
-        self.cli_controller = MatlabCliController()
+        while True:
+            try:
+                self.cli_controller = MatlabCliController()
+            except Exception as e:
+                self.start_matlab_cli_server()
+                time.sleep(TIME_INTERVAL_RETRY)
+            else:
+                break
 
     @pynvim.command('MatlabCliDisconnect', sync=True)
     def disconnect_from_matlab_cli(self):
@@ -70,14 +89,6 @@ class VimMatlab():
             self.nvim.command(f'!tmux split-window -h python {server_path}')
         except Exception as e:
             pass
-
-        while True:
-            try:
-                self.connect_to_matlab_cli()
-            except Exception as e:
-                time.sleep(TIME_INTERVAL_RETRY)
-            else:
-                break
 
     @pynvim.command('MatlabCliServerStop')
     def stop_matlab_cli_server(self):
