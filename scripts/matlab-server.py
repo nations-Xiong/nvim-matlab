@@ -54,7 +54,7 @@ class Matlab():
 
     def launch(self):
         self.kill()
-        self.proc = pexpect.spawn('matlab', ['-nosplash', '-nodesktop', '-nodisplay'])
+        self.proc = pexpect.spawn('matlab', ['-nosplash', '-nodesktop'])
         return self.proc
 
     def kill(self):
