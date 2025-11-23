@@ -9,6 +9,7 @@ import nvim_matlab.python_nvim_utils as python_nvim_utils
 
 TIME_INTERVAL_RETRY = 1
 
+
 @pynvim.plugin
 class VimMatlab():
     def __init__(self, nvim):
@@ -31,7 +32,6 @@ class VimMatlab():
         word_at_cursor = py_nvim_helper.get_word_at_cursor()
         doc_cmd = [f'doc {word_at_cursor};']
         self.cli_controller.exec_code(doc_cmd)
-
 
     @pynvim.command('MatlabCliRunSelection', sync=True)
     def run_selection_in_matlab_cli(self):
@@ -90,8 +90,10 @@ class VimMatlab():
         if self.cli_controller is not None:
             return
         try:
-            server_path = os.path.join(os.path.dirname(__file__), '../../../scripts/matlab-server.py')
-            self.nvim.command(f'silent !tmux split-window -h python {server_path}')
+            server_path = os.path.join(os.path.dirname(
+                __file__), '../../../scripts/matlab-server.py')
+            self.nvim.command(
+                f'silent !tmux split-window -h python {server_path}')
         except Exception as e:
             pass
 
@@ -101,3 +103,4 @@ class VimMatlab():
             return
         self.cli_controller.send_kill()
         self.disconnect_from_matlab_cli()
+        os.remove('/tmp/matlab-server.sock')  # clean socket
