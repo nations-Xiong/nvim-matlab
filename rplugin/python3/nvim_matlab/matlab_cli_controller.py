@@ -18,7 +18,7 @@ class MatlabCliController():
         self.connect_to_server()
 
     def connect_to_server(self):
-        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         self.s.connect((self.host, self.port))
         Timer(TIME_DELAY_ADD_PATH, self.setup_path).start()
 
